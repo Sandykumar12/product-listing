@@ -1,33 +1,31 @@
+import { notFound } from 'next/navigation';
+import { fetchProductById } from '../../../utils/api';
+import ProductDetails from '../../../components/ProductDetails';
 
 
-import { notFound } from 'next/navigation'
-import { fetchProductById } from '../../../utils/api'
-import ProductDetails from '../../../components/ProductDetails'
+import type { Metadata, ResolvingMetadata } from 'next';
 
-interface ProductPageProps {
-  params: {
-    id: string
-  }
+type Props = {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+ 
+  return {
+    title: `Product ${params.id}`,
+  };
 }
 
-const ProductPage = async ({ params }: ProductPageProps) => {
-  const productId = Number(params.id)
+export default async function Page({ params }: Props) {
+  const productId = Number(params.id);
+  if (isNaN(productId)) notFound();
 
-  if (isNaN(productId)) {
-    notFound()
-  }
+  const product = await fetchProductById(productId);
+  if (!product) notFound();
 
-  const product = await fetchProductById(productId)
-
-  if (!product) {
-    notFound()
-  }
-
-  return (
-    <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <ProductDetails product={product} />
-    </div>
-  )
+  return <ProductDetails product={product} />;
 }
-
-export default ProductPage

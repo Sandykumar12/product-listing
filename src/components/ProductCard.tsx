@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Product } from '../types/product';
+import Link from "next/link";
+import { Product } from "../types/product";
 
 interface ProductCardProps {
   product: Product;
@@ -17,14 +17,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{product.title}</h3>
+          <h3 className="text-lg font-semibold mb-2 line-clamp-2">
+            {product.title}
+          </h3>
           <div className="flex justify-between items-center">
             <span className="text-gray-800 font-bold">${product.price}</span>
             <span className="text-yellow-500">
               {product.rating.rate} ({product.rating.count})
             </span>
           </div>
-          <p className="text-gray-500 text-sm mt-2 line-clamp-2">{product.category}</p>
+          <p className="text-gray-500 text-sm mt-2 line-clamp-2">
+            {product.category}
+          </p>
         </div>
       </div>
     </Link>
