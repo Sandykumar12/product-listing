@@ -28,7 +28,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         Back to products
       </Link>
 
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden max-w-7xl mx-auto ">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/2 p-4 md:p-8 bg-gray-50 flex justify-center">
             <img
